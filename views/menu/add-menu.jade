@@ -1,0 +1,51 @@
+extends ../layout/base
+block content
+    section.content-header
+        h1
+            | Tambah Menu
+    section.content
+        .box
+            .box-header.with-border
+                h3.box-title
+                    | Daftar Menu
+                .box-tools.pull-right
+                    button(type='button', data-widget='collapse', data-toggle='tooltip', title='collapse').btn.btn-box-tool
+                        i.fa.fa-minus
+            .box-body
+                form(role='form', method='post' action='/menu/add')
+                    .row
+                        .col-xs-6
+                            .box-body
+                                - if(messages.msg_error)
+                                    .alert.alert-danger.alert-dismissable
+                                        button.close(type='button', data-dismiss='alert', aria-hidden='true')
+                                            | x
+                                        h4
+                                            i.icon.fa.fa-ban
+                                            | Alert!
+                                        | !{messages.msg_error}
+                                .form-group
+                                    label
+                                        | Kode
+                                    input(type="text", name='kode', placeholder='Masukkan Kode', autofocus).form-control
+                                .form-group
+                                    label
+                                        | Nama
+                                    input(type="text", name='nama', placeholder='Masukkan Nama').form-control
+                                .form-group
+                                    label
+                                        | Kategori
+                                    input(type="text", value='#{kategori}', name='kategori', placeholder='Masukkan Kategori').form-control
+                                .form-group
+                                    label
+                                        | Stok
+                                    input(type="text", name='stok', placeholder='Masukkan Stok').form-control
+                                .form-group
+                                    label
+                                        | Harga
+                                    input(type="text", name='harga', placeholder='Masukkan Harga').form-control
+                            .box-footer
+                                button(type='submit').btn.btn-primary
+                                    | Submit
+                                a(href='/menu').btn.btn-primary.pull-right
+                                    | Back

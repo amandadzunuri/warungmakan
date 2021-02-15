@@ -1,0 +1,62 @@
+extends ../layout/base
+block content
+    section.content-header
+        h1
+            | Edit Menu
+            small menu untuk edit data menu
+    section.content
+        .box
+            .box-header.with-border
+                h3.box-title
+                    | Menu
+                .box-tools.pull-right
+                    button(type='button', data-widget='collapse', data-toogle='tooltip', title='collapse').btn.btn-box-tool
+                        i.fa.fa-minus
+            .box-body
+                form(role='form', method='post', action='/menu/edit/#{(kode==undefined) ? data.kode : kode}')
+                    .row
+                        .col-xs-6
+                            .box.body
+                                - if (messages.msg_error)
+                                    .alert.alert-danger.alert-dismissable
+                                        button.close(type='button', data-dismiss='alert', aria-hidden='true')
+                                            | x
+                                        h4
+                                            i.icon.fa.fa-ban
+                                            | Alert!
+                                        | !{messages.msg_error}
+                                - if (messages.msg_info)
+                                    .alert.alert-success.alert-dismissable
+                                        button.close(type='button', data-dismiss='alert', aria-hidden='true')
+                                            | x
+                                        h4
+                                            i.icon.fa.fa-ban
+                                            | Success!
+                                        | !{messages.msg_info}
+                                .form-group
+                                    label
+                                        | Kode
+                                    input(type="text", value='#{(kode==undefined) ? data.kode : kode }', name="kode", placeholder='Masukkan kode').form-control
+                                .form-group
+                                    label
+                                        | Nama
+                                    input(type="text", nodemo, name="nama", placeholder='Masukkan nama', autofocus).form-control
+                                .form-group
+                                    label
+                                        | Kategori
+                                    input(type="text", value='#{(kategori==undefined) ? data.kategori : kategori }', name="kategori", placeholder='Masukkan kategori').form-control
+                                .form-group
+                                    label
+                                        | Stok
+                                    input(type="text", value='#{(stok==undefined) ? data.stok : stok }', name="stok", placeholder='Masukkan stok').form-control
+                                .form-group
+                                    label
+                                        | Harga
+                                    input(type="text", value='#{(harga==undefined) ? data.harga : harga }', name="harga", placeholder='Masukkan harga').form-control
+                            .box-footer
+                                input(type="hidden", name='_method', value='PUT')
+                                button(type='submit').btn.btn-primary
+                                    i.fa.fa-pencil
+                                    | Edit
+                                a(href='/menu').btn.btn-primary.pull-right
+                                    | Back

@@ -1,0 +1,70 @@
+extends ../layout/base
+block content
+    section.content-header
+        h1
+            | Daftar Menu
+    section.content
+        .box
+            .box-header.with-border
+                h3.box-title
+                    | Daftar Menu
+                .box-tools.pull-right
+                    button(type='button', data-widget='collapse', data-toggle='tooltip', title='collapse').btn.btn-box-tool
+                         i.fa.fa-minus
+            .box-body
+                - if(messages.msg_info)
+                    .alert.alert-success.alert-dismissable
+                        button.close(type='button', data-dismiss='alert', aria-hidden='true')
+                            | x
+                        h4
+                            i.icon.fa.fa-check
+                            | Success!
+                        | !{messages.msg_info}
+                - if(messages.msg_error)
+                    .alert.alert-danger.alert-dismissable
+                        button.close(type='button', data-dismiss='alert', aria-hidden='true')
+                            | x
+                        h4
+                            i.icon.fa.fa-ban
+                            | Alert!
+                        | !{messages.msg_error}
+                a(href='menu/add').pull-left.btn.btn-primary
+                    i.fas.fa-plus
+                    | Tambah Menu
+                .data-table
+                    table.table.table-bordered
+                        tr
+                            th
+                                | No
+                            th
+                                | Kode
+                            th
+                                | Nama
+                            th
+                                | Kategori
+                            th
+                                | Stok
+                            th
+                                | Harga
+                            th
+                                | Action
+                            if messages.msg_error
+                                | !{messages.msg_error}
+                            else
+                                for row, index in data
+                                    tr
+                                        td #{index+1}
+                                        td #{row.kode}
+                                        td #{row.nama}
+                                        td #{row.kategori}
+                                        td #{row.stok}
+                                        td #{row.harga}
+                                        td
+                                            div(style='display:inline-block')
+                                                a(href='/menu/edit/#{row.kode}').btn.btn-sm.btn-primary
+                                                        i.fa.fa-edit
+                                            div(style='display:inline-block')
+                                                form(method='post', action='/menu/delete/#{row.kode}')
+                                                    input(type="hidden", name="_method", value="DELETE")
+                                                    button.btn.btn-sm.btn-danger(type='submit')
+                                                        i.fa.fa-remove
